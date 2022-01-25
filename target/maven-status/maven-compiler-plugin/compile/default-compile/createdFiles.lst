@@ -1,0 +1,8 @@
+com/blog/controller/BlogPostController.class
+com/blog/repository/BlogPostRepository.class
+com/blog/entity/BlogPost.class
+com/blog/controller/WelcomeController.class
+com/blog/Application.class
+com/blog/service/BlogPostServiceImplementation.class
+com/blog/controller/KusokKala.class
+com/blog/service/BlogPostService.class
