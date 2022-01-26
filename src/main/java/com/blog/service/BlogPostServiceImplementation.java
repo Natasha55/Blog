@@ -1,6 +1,6 @@
 package com.blog.service;
 
-import com.blog.controller.Exception;
+import com.blog.controller.BlogPostNotFoundException;
 import com.blog.entity.BlogPost;
 import com.blog.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class BlogPostServiceImplementation implements BlogPostService {
         if (blogPostRepository.findById(blogPostId).isPresent()) {
             return blogPostRepository.findById(blogPostId).get();
         }
-        throw new Exception(blogPostId);
+        throw new BlogPostNotFoundException(blogPostId);
     }
 
     @Override
