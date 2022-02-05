@@ -4,7 +4,9 @@ import com.blog.controller.BlogPostNotFoundException;
 import com.blog.entity.BlogPost;
 import com.blog.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +15,10 @@ public class BlogPostServiceImplementation implements BlogPostService {
 
     @Autowired
     private BlogPostRepository blogPostRepository;
+
+    public BlogPostServiceImplementation(BlogPostRepository blogPostRepository) {
+        this.blogPostRepository = blogPostRepository;
+    }
 
     @Override
     public BlogPost saveBlogPost(BlogPost blogPost) {
@@ -25,33 +31,55 @@ public class BlogPostServiceImplementation implements BlogPostService {
     }
 
     @Override
-    public BlogPost fetchBlogPostById(Long blogPostId) {
-        if (blogPostRepository.findById(blogPostId).isPresent()) {
-            return blogPostRepository.findById(blogPostId).get();
+    public BlogPost fetchBlogPostById(Long id) {
+        if (blogPostRepository.findById(id).isPresent()) {
+            return blogPostRepository.findById(id).get();
         }
-        throw new BlogPostNotFoundException(blogPostId);
+        throw new BlogPostNotFoundException(id);
     }
 
     @Override
-    public void deleteBlogPostById(Long blogPostId) {
-        blogPostRepository.deleteById(blogPostId);
+    public void deleteBlogPostById(Long id) {
+        blogPostRepository.deleteById(id);
     }
 
     @Override
-    public BlogPost updateBlogPost(Long blogPostId, BlogPost blogPost) {
-        BlogPost blogPostDataBase = blogPostRepository.findById(blogPostId).get();
+    public BlogPost updateBlogPost(Long id, BlogPost blogPost) {
+        BlogPost blogPostDataBase = blogPostRepository.findById(id).get();
 
 
-        if (Objects.nonNull(blogPost.getBlogPostTitle()) &&
-                !"".equalsIgnoreCase(blogPost.getBlogPostTitle())) {
-            blogPostDataBase.setBlogPostTitle(blogPost.getBlogPostTitle());
+        if (Objects.nonNull(blogPost.getTitle()) &&
+                !"".equalsIgnoreCase(blogPost.getTitle())) {
+            blogPostDataBase.setTitle(blogPost.getTitle());
         }
 
-        if (Objects.nonNull(blogPost.getBlogPostContent()) &&
-                !"".equalsIgnoreCase(blogPost.getBlogPostContent())) {
-            blogPostDataBase.setBlogPostContent(blogPost.getBlogPostContent());
+        if (Objects.nonNull(blogPost.getContent()) &&
+                !"".equalsIgnoreCase(blogPost.getContent())) {
+            blogPostDataBase.setContent(blogPost.getContent());
         }
         return blogPostRepository.save(blogPostDataBase);
     }
 
+    @Override
+    public List<BlogPost> fetchAllBlogPostByTitle(String title) {
+        return blogPostRepository.findByTitleIgnoreCase(title);
+    }
+
+    @Override
+    public List<BlogPost> sortBlogPostByTitleAsc(String title) {
+        return blogPostRepository.findAll(Sort.by(Sort.Direction.ASC, title));
+    }
+
+    @Override
+    public List<BlogPost> fetchAllBlogPostByStar(Boolean star) {
+        if (star = Boolean.FALSE) {
+            return blogPostRepository.findAll();
+        } else {
+            return blogPostRepository.findByStar(Boolean.TRUE);
+        }
+    }
+
+
 }
+
+

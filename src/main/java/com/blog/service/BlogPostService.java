@@ -5,14 +5,22 @@ import com.blog.entity.BlogPost;
 import java.util.List;
 
 public interface BlogPostService {
-   public BlogPost saveBlogPost(BlogPost blogPost);
 
-   public List<BlogPost> fetchBlogPostList();
+    BlogPost saveBlogPost(BlogPost blogPost);
 
-   public BlogPost fetchBlogPostById(Long blogPostId);
+    List<BlogPost> fetchBlogPostList();
 
-   public void deleteBlogPostById(Long blogPostId);
+    BlogPost fetchBlogPostById(Long id);
 
-   public BlogPost updateBlogPost(Long blogPostId, BlogPost blogPost);
+    void deleteBlogPostById(Long id);
+
+    BlogPost updateBlogPost(Long id, BlogPost blogPost);
+
+    List<BlogPost> fetchAllBlogPostByTitle(String title);
+
+    List<BlogPost> sortBlogPostByTitleAsc(String title);
+
+    List<BlogPost> fetchAllBlogPostByStar(Boolean star);
+
 }
 

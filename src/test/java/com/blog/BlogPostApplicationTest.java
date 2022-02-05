@@ -1,2 +1,9 @@
-package com.blog;public class BlogPostApplicationTest {
+package com.blog;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class BlogPostApplicationTest {
+
 }
