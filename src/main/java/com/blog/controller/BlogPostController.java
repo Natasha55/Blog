@@ -5,12 +5,11 @@ import com.blog.service.BlogPostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -38,7 +37,7 @@ public class BlogPostController {
             return blogPostService.fetchBlogPostList();
         }
         if (sort != null) {
-            return blogPostService.sortBlogPostByTitleAsc(sort);
+            return blogPostService.sortBlogPostByParameterAsc(sort);
         } else {
             return blogPostService.fetchAllBlogPostByTitle(title);
         }
@@ -59,7 +58,7 @@ public class BlogPostController {
     @PutMapping("/{id}")
     public BlogPost updateBlogPost(@PathVariable("id") Long id,
                                    @RequestBody BlogPost blogPost)
-            throws BlogPostNotFoundException {
+            throws NoSuchElementException {
         return blogPostService.updateBlogPost(id, blogPost);
     }
 

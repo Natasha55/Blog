@@ -66,8 +66,8 @@ public class BlogPostServiceImplementation implements BlogPostService {
     }
 
     @Override
-    public List<BlogPost> sortBlogPostByTitleAsc(String title) {
-        return blogPostRepository.findAll(Sort.by(Sort.Direction.ASC, title));
+    public List<BlogPost> sortBlogPostByParameterAsc(String sortParameter) {
+        return blogPostRepository.findAll(Sort.by(Sort.Direction.ASC, sortParameter));
     }
 
     @Override

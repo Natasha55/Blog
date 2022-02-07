@@ -1,5 +1,6 @@
 package com.blog.service;
 
+import com.blog.controller.BlogPostNotFoundException;
 import com.blog.entity.BlogPost;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface BlogPostService {
 
     List<BlogPost> fetchAllBlogPostByTitle(String title);
 
-    List<BlogPost> sortBlogPostByTitleAsc(String title);
+    List<BlogPost> sortBlogPostByParameterAsc(String sortParameter);
 
     List<BlogPost> fetchAllBlogPostByStar(Boolean star);
 
