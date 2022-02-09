@@ -1,6 +1,5 @@
 package com.blog.service;
 
-import com.blog.controller.BlogPostNotFoundException;
 import com.blog.entity.BlogPost;
 
 import java.util.List;
@@ -23,5 +22,6 @@ public interface BlogPostService {
 
     List<BlogPost> fetchAllBlogPostByStar(Boolean star);
 
+    BlogPost addStarToBlogPost(Long id);
 }
 

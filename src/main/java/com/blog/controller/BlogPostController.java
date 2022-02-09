@@ -69,9 +69,9 @@ public class BlogPostController {
     }
 
     @PutMapping("/{id}/star")
-    public String addBlogPostStar(@PathVariable("id") Long id)
+    public BlogPost addBlogPostStar(@PathVariable("id") Long id)
             throws BlogPostNotFoundException {
-//        blogPostService.
-        return "Post add star to blog";
+       return blogPostService.addStarToBlogPost(id);
     }
+
 }

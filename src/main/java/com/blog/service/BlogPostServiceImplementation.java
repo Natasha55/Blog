@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
+import static java.lang.Boolean.*;
 
 @Service
 public class BlogPostServiceImplementation implements BlogPostService {
 
     @Autowired
-    private BlogPostRepository blogPostRepository;
+    private final BlogPostRepository blogPostRepository;
 
     public BlogPostServiceImplementation(BlogPostRepository blogPostRepository) {
         this.blogPostRepository = blogPostRepository;
@@ -72,13 +75,25 @@ public class BlogPostServiceImplementation implements BlogPostService {
 
     @Override
     public List<BlogPost> fetchAllBlogPostByStar(Boolean star) {
-        if (star = Boolean.FALSE) {
+        if (star == FALSE) {
             return blogPostRepository.findAll();
         } else {
-            return blogPostRepository.findByStar(Boolean.TRUE);
+            return blogPostRepository.findByStar(TRUE);
         }
     }
 
+    @Override
+    public BlogPost addStarToBlogPost(Long id) {
+        Optional<BlogPost> blogPostDataBase = blogPostRepository.findById(id);
+
+        if (blogPostDataBase.isPresent()) {
+           BlogPost blogPost = blogPostDataBase.get();
+           blogPost.setStar(TRUE);
+           return blogPostRepository.save(blogPost);
+        }
+
+        throw new BlogPostNotFoundException(id);
+    }
 
 }
 
