@@ -95,6 +95,17 @@ public class BlogPostServiceImplementation implements BlogPostService {
         throw new BlogPostNotFoundException(id);
     }
 
+    @Override
+    public BlogPost deleteBlogPostStar(Long id) {
+        Optional<BlogPost> blogPostDataBase = blogPostRepository.findById(id);
+        if (blogPostDataBase.isPresent()){
+            BlogPost blogPost = blogPostDataBase.get();
+            blogPost.setStar(FALSE);
+            return blogPostRepository.save(blogPost);
+        }
+        throw new BlogPostNotFoundException(id);
+    }
+
 }
 
 

@@ -23,5 +23,7 @@ public interface BlogPostService {
     List<BlogPost> fetchAllBlogPostByStar(Boolean star);
 
     BlogPost addStarToBlogPost(Long id);
+
+    BlogPost deleteBlogPostStar(Long id);
 }
 

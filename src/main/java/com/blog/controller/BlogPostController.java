@@ -74,4 +74,10 @@ public class BlogPostController {
        return blogPostService.addStarToBlogPost(id);
     }
 
+    @DeleteMapping("/{id}/star")
+    public BlogPost deleteBlogPostStar(@PathVariable("id") Long id)
+            throws BlogPostNotFoundException {
+        return blogPostService.deleteBlogPostStar(id);
+    }
+
 }
