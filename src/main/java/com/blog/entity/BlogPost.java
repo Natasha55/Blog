@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -20,12 +18,22 @@ public class BlogPost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//    @SequenceGenerator(
+//            name = "blogPost_sequence",
+//            sequenceName = "blogPost_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "blogPost_sequence"
+//    )
     private Long id;
-
-    //    @NotBlank(message = "Please add title")
     private String title;
-    //    @NotBlank(message = "Please add content")
     private String content;
     private Boolean star;
+
+    @OneToMany(cascade = CascadeType.ALL)// fetch = FetchType.LAZY)
+    @JoinColumn(name = "blogPost_id", referencedColumnName = "id")
+    private List<Comment> comments;
 
 }
