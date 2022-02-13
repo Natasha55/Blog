@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -15,23 +17,13 @@ import java.time.LocalDateTime;
 @Builder
 public class Comment {
 
-//    private Long postId;
+    private Long postId;
     @Id
-//    @SequenceGenerator(
-//            name = "comment_sequence",
-//            sequenceName = "comment_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "comment_sequence"
-//    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
     private String commentText;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")  //    @CreatedDate
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    private BlogPost blogPost;
 
 }

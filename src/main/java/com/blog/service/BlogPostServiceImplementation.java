@@ -87,9 +87,9 @@ public class BlogPostServiceImplementation implements BlogPostService {
         Optional<BlogPost> blogPostDataBase = blogPostRepository.findById(id);
 
         if (blogPostDataBase.isPresent()) {
-           BlogPost blogPost = blogPostDataBase.get();
-           blogPost.setStar(TRUE);
-           return blogPostRepository.save(blogPost);
+            BlogPost blogPost = blogPostDataBase.get();
+            blogPost.setStar(TRUE);
+            return blogPostRepository.save(blogPost);
         }
 
         throw new BlogPostNotFoundException(id);
@@ -98,7 +98,7 @@ public class BlogPostServiceImplementation implements BlogPostService {
     @Override
     public BlogPost deleteBlogPostStar(Long id) {
         Optional<BlogPost> blogPostDataBase = blogPostRepository.findById(id);
-        if (blogPostDataBase.isPresent()){
+        if (blogPostDataBase.isPresent()) {
             BlogPost blogPost = blogPostDataBase.get();
             blogPost.setStar(FALSE);
             return blogPostRepository.save(blogPost);
